@@ -141,4 +141,11 @@ public class Matriz {
         return true;
     }
 
+    /**
+     * @description somar uma matriz b" a uma matriz já existente "this", se duas matrizes não tiverem o mesmo tamanho retorne null
+     * @param   b:   matriz para ser adicionada na matriz atual
+     * @param   res: matriz auxiliar que vai guardar o resultado.
+     * @return  retorna res como resultado.
+     */
+    
 }
