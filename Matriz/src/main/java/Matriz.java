@@ -19,51 +19,6 @@ public class Matriz {
     }
 
     /**
-     * @return a quatidade de linhas matriz.
-     */
-    public int getLin() {
-        return lin;
-    }
-
-    /**
-     * @return a quantidade de colunas da matriz.
-     */
-    public int getColun() {
-        return colun;
-    }
-
-    /**
-     * @description Retornar elementos da matriz.
-     * @param   i: posição da linha
-     * @param   j: posição da coluna
-     * @return element E[i,j]
-     */
-    public double getElemento(int i, int j) {
-        return matriz[i - 1][j - 1];
-    }
-
-    /**
-     * @description Retornar elementos da matriz.
-     * @param   i: posição da linha
-     * @param   j: posição da coluna
-     * @param   v: novo valor setado
-     */
-    public void setElemento(int i, int j, double v) {
-        matriz[i - 1][j - 1] = v;
-    }
-
-    /**
-     * @description Negar todos os elementos da matriz
-     */
-    public void negar() {
-        for (int i = 0; i < lin; i++) {
-            for (int j = 0; j < colun; j++) {
-                matriz[i][j] = -matriz[i][j];
-            }
-        }
-    }
-
-    /**
      * @description Construtor recebe a matriz através de um objeto da classe Scanner
      * @param   s: Objeto da classe Scanner com valores para preencher a matriz
      */
@@ -75,6 +30,71 @@ public class Matriz {
         for (int i = 0; i < lin; i++) {
             for (int j = 0; j < colun; j++) {
                 matriz[i][j] = s.nextDouble();
+            }
+        }
+    }
+
+    /**
+     * @description Construtor clona a matriz passada
+     * @param   mtz: matriz para ser clonada
+     */
+    public Matriz(Matriz mtz) {
+        lin = mtz.getLin();
+        colun = mtz.getColun();
+        matriz = new double[lin][colun];
+
+        for (int i = 0; i < lin; i++) {
+            for (int j = 0; j < colun; j++) {
+                matriz[i][j] = mtz.matriz[i][j];
+            }
+        }
+    }
+
+    /**
+     * @return a quatidade de linhas matriz.
+     */
+    public int getLin() {
+
+        return lin;
+    }
+
+    /**
+     * @return a quantidade de colunas da matriz.
+     */
+    public int getColun() {
+
+        return colun;
+    }
+
+    /**
+     * @description Retornar elementos da matriz.
+     * @param   i: posição da linha
+     * @param   j: posição da coluna
+     * @return element E[i,j]
+     */
+    public double getElemento(int i, int j) {
+
+        return matriz[i - 1][j - 1];
+    }
+
+    /**
+     * @description Retornar elementos da matriz.
+     * @param   i: posição da linha
+     * @param   j: posição da coluna
+     * @param   v: novo valor setado
+     */
+    public void setElemento(int i, int j, double v) {
+
+        matriz[i - 1][j - 1] = v;
+    }
+
+    /**
+     * @description Negar todos os elementos da matriz
+     */
+    public void negar() {
+        for (int i = 0; i < lin; i++) {
+            for (int j = 0; j < colun; j++) {
+                matriz[i][j] = -matriz[i][j];
             }
         }
     }
@@ -93,30 +113,14 @@ public class Matriz {
             }
 
             // multiplicação
-            for (int i = 1; i < lin; i++) {
-                for (int j = 1; j < colun; j++) {
+            for (int i = 0; i < lin; i++) {
+                for (int j = 0; j < colun; j++) {
                     res.matriz[i][j] = num * matriz[i][j];
                 }
             }
         }
 
         return res;
-    }
-
-    /**
-     * @description Construtor clona a matriz passada
-     * @param   mtz: matriz para ser clonada
-     */
-    public Matriz(Matriz mtz) {
-        lin = mtz.getLin();
-        colun = mtz.getColun();
-        matriz = new double[lin][colun];
-
-        for (int i = 0; i < lin; i++) {
-            for (int j = 0; j < colun; j++) {
-                matriz[i][j] = mtz.matriz[i][j];
-            }
-        }
     }
 
     /**
@@ -147,5 +151,21 @@ public class Matriz {
      * @param   res: matriz auxiliar que vai guardar o resultado.
      * @return  retorna res como resultado.
      */
-    
+    public Matriz somar(Matriz b, Matriz res) {
+        if ((res == null) || (b == null) ||
+                (b.getLin() != lin) || (b.getColun() != colun) ||
+                (res.getLin() != lin) || (res.getColun() != colun)) {
+            return res;
+        }
+
+        // Soma
+        for (int i = 0; i < lin; i++) {
+            for (int j = 0; j < colun; j++) {
+                res.matriz[i][j] = matriz[i][j] + b.matriz[i][j];
+            }
+        }
+        return res;
+    }
+
+
 }
